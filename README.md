@@ -1,4 +1,4 @@
-# vcs-realtime-sdk example app
+# realtime-sdk-demo-web
 
 This example application uses the [vcs-realtime-sdk](https://sdk.virtualcareservices.net/) SDK to demonstrate a virtual room users can join with audio and/or video. Two parts make up the application:
 
