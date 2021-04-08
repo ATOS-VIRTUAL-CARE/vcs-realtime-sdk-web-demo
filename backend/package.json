@@ -1,0 +1,19 @@
+{
+  "name": "realtime-sdk-demo-backend",
+  "version": "0.2.4",
+  "description": "Express app to create rooms and host static vue app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "roger.urscheler@atos.net",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cors": "2.8.5",
+    "dotenv-flow": "3.2.0",
+    "express": "4.17.1",
+    "express-rate-limit": "5.2.6",
+    "node-fetch": "2.6.1"
+  }
+}

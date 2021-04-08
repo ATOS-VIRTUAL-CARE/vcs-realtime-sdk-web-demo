@@ -1,0 +1,19 @@
+{
+  "name": "@atos-virtual-care/realtime-sdk-demo-web",
+  "version": "0.2.4",
+  "description": "Example app for vcs-realtime-sdk with vuejs",
+  "author": "roger.urscheler@atos.net",
+  "license": "Apache-2.0",
+  "scripts": {
+    "postinstall": "(cd backend && npm install); (cd frontend && npm install --force)",
+    "start": "cd backend && NODE_ENV=production npm start",
+    "dev": "(cd backend && NODE_ENV=development npm start&); (cd frontend && npm run dev)",
+    "build:frontend": "cd frontend && npm run build",
+    "deploy:gcp": "NODE_ENV=production npm run build:frontend && gcloud app deploy --quiet"
+  },
+  "repository": "git://github.com/atos-virtual-care/realtime-sdk-demo-web.git",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "keywords": []
+}
