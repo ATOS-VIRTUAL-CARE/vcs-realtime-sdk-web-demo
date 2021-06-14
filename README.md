@@ -1,16 +1,21 @@
-# realtime-sdk-demo-web
+# VCS Realtime SDK sample application for web clients
 
-This example application uses the [vcs-realtime-sdk](https://sdk.virtualcareservices.net/) SDK to demonstrate a virtual room users can join with audio and/or video. Two parts make up the application:
+This sample application uses the [Virtual Care Service (VCS) Realtime JavaScript SDK](https://sdk.virtualcareservices.net/) to demonstrate how users use join virtual rooms to interact with audio and/or video.
 
-1. **Application server**: The application server is a nodejs app that serves two purposes, a) serve the frontend vuejs application, and b) create rooms on behalf of the frontend application using the [REST API](https://sdk.virtualcareservices.net/sdks/rest/) of the VCS Cloud System.
+The application has two parts:
 
-2. **Frontend vue app**: The frontend app uses the vcs-realtime-sdk JavaScript SDK to join the room. Peer-2peer WebRTC is used for media communication.
+1. **Application server**: The application server is a Node.js app that serves two purposes, a) serve the frontend Vue.js application, and b) create rooms on behalf of the frontend application using the [VCS REST API](https://sdk.virtualcareservices.net/sdks/rest/).
+2. **Frontend Vue app**: The frontend app uses the [VCS Realtime JavaScript SDK](https://sdk.virtualcareservices.net/) to join the virtual room. Peer-2peer WebRTC is used for media communication.
 
 A live demo is hosted at <https://sdk-demo.virtualcareservices.net/>.
 
-> At this time only two participants can join a room, but that restriction will be lifted shortly.
+> At this time only two participants can join a room - multi-party calls coming soon.
 
-## Get the code
+## Running the code on your environment
+
+### Getting the code
+
+Clone this repository and install the dependencies.
 
 ```bash
 git clone https://github.com/ATOS-VIRTUAL-CARE/realtime-sdk-demo-web
@@ -18,33 +23,43 @@ cd realtime-sdk-demo-web
 npm install
 ```
 
-## Get an API Key
+### Getting an API key
 
-Contact the system administrator of your VCS system to obtain a `VCS_API_KEY` and add the key to the `/backend/.env` file.
+Contact the system administrator of your VCS system to obtain a VCS API key. Once you have the key, add the key to the `/backend/.env` file, in the `VCS_API_KEY` parameter.
 
-## Run app locally
+**IMPORTANT**: Do not commit the key to any public repository. Anyone with the key will be able to make calls on that system.
 
-To run the app locally, there is no need to add any `.env` configuration other than the `VCS_API_KEY` mentioned above. All you need to do is to start the backend and frontend.
+### Running the app locally
+
+There are no other dependencies to run the app locally. Once you add the API key as explained above, start the backend and frontend. The application is available at <http://localhost:3000/>.
 
 ```bash
-# Start the backend application server and frontend vue app
+# Start the backend application server and frontend Vue app
 npm run dev
 
 # Navigate to http://localhost:3000/
 ```
 
-## Configuration
+## Running the code with a VCS system
 
-Description of the `.env` configuration parameters.
+To connect to an external VCS system, configure the following parameters in the `.env` file.
 
-### Backend (nodejs)
+### Backend (Node.js)
 
-**VCS_HOST**: Domain of the VCS System. Default is `sandbox.virtualcareservices.net`.
+- `VCS_HOST`: Domain of the VCS system. Default is `sandbox.virtualcareservices.net`.
+- `VCS_API_KEY`: API key required by the backend to authenticate with the VCS system. It can be the same you used to run the code locally.
+- `PORT`: Port to listen for frontend app. Default is 3001.
 
-**VCS_API_KEY**: API Key required by backend to authenticate with the VCS System.
+### Frontend (Vue)
 
-**PORT**: Port to listen for frontend app. Default is 3001.
+- `VITE_APP_SERVER`: Address of backend server. Default is `localhost:3001`.
 
-### Frontend (vue)
+## More information
 
-**VITE_APP_SERVER**: Address of backend server. Default is `localhost:3001`.
+Where to find more information about the VCS Realtime SDKs and APIs.
+
+- [Main page for the VCS SDKs and APIs](https://sdk.virtualcareservices.net/)
+- [An overview of how application servers and clients work together to create audio/video sessions](https://sdk.virtualcareservices.net/guide/#overview)
+- [JavaScript SDK documentation](https://sdk.virtualcareservices.net/sdks/js/)
+- [iOS  SDK documentation](https://sdk.virtualcareservices.net/sdks/ios/)
+- [Android SDK documentation](https://sdk.virtualcareservices.net/sdks/android/)
