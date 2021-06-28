@@ -18,8 +18,8 @@ A live demo is hosted at <https://sdk-demo.virtualcareservices.net/>.
 Clone this repository and install the dependencies.
 
 ```bash
-git clone https://github.com/ATOS-VIRTUAL-CARE/realtime-sdk-demo-web
-cd realtime-sdk-demo-web
+git clone https://github.com/ATOS-VIRTUAL-CARE/realtime-sdk-web-demo
+cd realtime-sdk-web-demo
 npm install
 ```
 
