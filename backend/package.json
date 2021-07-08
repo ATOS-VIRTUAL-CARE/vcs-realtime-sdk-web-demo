@@ -1,5 +1,5 @@
 {
-  "name": "realtime-sdk-demo-backend",
+  "name": "vcs-realtime-sdk-demo-backend",
   "version": "0.2.4",
   "description": "Express app to create rooms and host static vue app",
   "main": "index.js",

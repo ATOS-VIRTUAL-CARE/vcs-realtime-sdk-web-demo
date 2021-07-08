@@ -1,7 +1,7 @@
 <template>
   <Preferences ref="preferences"></Preferences>
   <div class="version">
-    <div><a target="_blank" href="https://github.com/atos-virtual-care/realtime-sdk-web-demo">App Version: v{{ $store.state.version }}</a></div>
+    <div><a target="_blank" href="https://github.com/atos-virtual-care/vcs-realtime-sdk-web-demo">App Version: v{{ $store.state.version }}</a></div>
     <div><a target="_blank" href="https://sdk.virtualcareservices.net">SDK Version: v{{ $store.state.sdkVersion }}</a></div>
   </div>
   <div class="home">
