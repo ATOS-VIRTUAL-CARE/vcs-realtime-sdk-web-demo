@@ -9,7 +9,7 @@ The application has two parts:
 
 A live demo is hosted at <https://sdk-demo.virtualcareservices.net/>.
 
-> At this time only two participants can join a room - multi-party calls coming soon.
+> At this time only four participants can join a room
 
 ## Running the code on your environment
 
