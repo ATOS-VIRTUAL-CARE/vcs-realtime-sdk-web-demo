@@ -5,13 +5,11 @@ This sample application uses the [Virtual Care Service (VCS) Realtime JavaScript
 The application has two parts:
 
 1. **Application server**: The application server is a Node.js app that serves two purposes, a) serve the frontend Vue.js application, and b) create rooms on behalf of the frontend application using the [VCS REST API](https://sdk.virtualcareservices.net/sdks/rest/).
-2. **Frontend Vue app**: The frontend app uses the [VCS Realtime JavaScript SDK](https://sdk.virtualcareservices.net/) to join the virtual room. Peer-2peer WebRTC is used for media communication.
-
-A live demo is hosted at <https://sdk-demo.virtualcareservices.net/>.
+2. **Frontend Vue app**: The frontend app uses the [VCS Realtime JavaScript SDK](https://sdk.virtualcareservices.net/) to join the virtual room. Peer-2-peer WebRTC is used for media communication.
 
 > At this time only four participants can join a room
 
-## Running the code on your environment
+## Running application locally
 
 ### Getting the code
 
@@ -23,36 +21,27 @@ cd vcs-realtime-sdk-web-demo
 npm install
 ```
 
-### Getting an API key
+### Configure the app
 
-Contact the system administrator of your VCS system to obtain a VCS API key. Once you have the key, add the key to the `/backend/.env` file, in the `VCS_API_KEY` parameter.
+#### Application server
 
-**IMPORTANT**: Do not commit the key to any public repository. Anyone with the key will be able to make calls on that system.
+Contact the system administrator of your VCS system to obtain a VCS API key and the domain of the VCS system. Update the file `/backend/.env` with the obtained API Key for parameter `VCS_API_KEY`, and the VCS domain for parameter VCS_HOST (without https:// prefix). For the port specify `3001` as the default port `80` might already be in use on your PC.
 
-### Running the app locally
+#### Frontend Vue app
+
+Set the `VITE_APP_SERVER` parameter in file `/frontend/.env` to `localhost:3001`. This tells your web app where the Application server is hosted at.
+
+
+### Start the app
 
 There are no other dependencies to run the app locally. Once you add the API key as explained above, start the backend and frontend. The application is available at <http://localhost:3000/>.
 
 ```bash
-# Start the backend application server and frontend Vue app
+# Start the backend application server and frontend Vue app (default port 3000)
 npm run dev
 
 # Navigate to http://localhost:3000/
 ```
-
-## Running the code with a VCS system
-
-To connect to an external VCS system, configure the following parameters in the `.env` file.
-
-### Backend (Node.js)
-
-- `VCS_HOST`: Domain of the VCS system. Default is `sandbox.virtualcareservices.net`.
-- `VCS_API_KEY`: API key required by the backend to authenticate with the VCS system. It can be the same you used to run the code locally.
-- `PORT`: Port to listen for frontend app. Default is 3001.
-
-### Frontend (Vue)
-
-- `VITE_APP_SERVER`: Address of backend server. Default is `localhost:3001`.
 
 ## More information
 
