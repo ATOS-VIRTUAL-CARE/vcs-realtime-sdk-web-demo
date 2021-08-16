@@ -24,6 +24,7 @@ if (!process.env.VCS_API_KEY) {
   process.exit(1);
 }
 console.log('VCS_API_KEY:', process.env.VCS_API_KEY);
+console.log('VCS_AUTH_TYPE:', process.env.VCS_AUTH_TYPE);
 
 // Setup CORS to allow only origin
 app.use(cors({

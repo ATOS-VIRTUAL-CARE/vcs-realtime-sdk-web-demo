@@ -59,7 +59,7 @@ const store = createStore({
         if (res.status === 409) {
           throw new Error(`Room "${name}" already exists`);
         }
-        throw res.statusText;
+        throw new Error('Error creating room. VCS system might be down at this time.');
       }
       res = await res.json();
       commit('saveToken', { room: res.room.name, token: res.room.token });
@@ -73,9 +73,9 @@ const store = createStore({
       });
       if (!res.ok) {
         if (res.status === 404) {
-          throw new Error(`Room ${name} not found`);
+          throw new Error(`Room "${name}" not found`);
         } else {
-          throw res.statusText;
+          throw new Error('Error looking up room. VCS system might be down at this time.');
         }
       }
       res = await res.json();
@@ -92,7 +92,7 @@ const store = createStore({
         if (res.status === 404) {
           throw new Error('Config not found');
         } else {
-          throw res.statusText;
+          throw new Error('Error fetching config. VCS system might be down at this time.');
         }
       }
       res = await res.json();
