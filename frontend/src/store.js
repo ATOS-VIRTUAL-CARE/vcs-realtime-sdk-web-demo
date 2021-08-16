@@ -32,7 +32,7 @@ const store = createStore({
   mutations: {
     saveToken: (state, obj) => {
       if (!obj || !obj.token || !obj.room) {
-        throw 'saveToken: token or room is null';
+        throw new Error('saveToken: token or room is null');
       }
       state.tokens[obj.room] = obj.token;
     },
@@ -43,16 +43,21 @@ const store = createStore({
   },
 
   actions: {
-    async createRoom({ commit }, name) {
-      // Ask app server to create room with the VCS service
+    async createRoom({ state, commit }, name) {
+      const isBasicAuth = state.config.AUTH_TYPE === 'BASIC_AUTH';
+
+      // Ask application server to create a room
+      const headers = { 'content-type': 'application/json' };
+
       let res = await fetch(`${backend}/api/room`, {
         method: 'post',
-        headers: { 'content-type': 'application/json' },
+        headers,
+        credentials: isBasicAuth ? 'include' : 'omit',
         body: JSON.stringify({ name })
       });
       if (!res.ok) {
         if (res.status === 409) {
-          throw `Room "${name}" already exists`;
+          throw new Error(`Room "${name}" already exists`);
         }
         throw res.statusText;
       }
@@ -68,7 +73,7 @@ const store = createStore({
       });
       if (!res.ok) {
         if (res.status === 404) {
-          throw `Room ${name} not found`;
+          throw new Error(`Room ${name} not found`);
         } else {
           throw res.statusText;
         }
@@ -85,7 +90,7 @@ const store = createStore({
       });
       if (!res.ok) {
         if (res.status === 404) {
-          throw 'Config not found';
+          throw new Error('Config not found');
         } else {
           throw res.statusText;
         }

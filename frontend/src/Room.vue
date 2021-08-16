@@ -208,9 +208,6 @@ export default {
       // Remember room
       this.$store.state.activeRoom = room;
 
-      // Fetch VCS host from backend
-      await this.$store.dispatch('fetchConfig');
-
       this.room = await joinRoom(token, {
         audio: this.$store.getters.useAudio,
         video: this.$store.getters.useVideo,

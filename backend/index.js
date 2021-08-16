@@ -4,9 +4,11 @@ const cors = require('cors');
 const fetch = require('node-fetch');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
+const { basicAuth } = require('./auth');
 
 const app = express();
 app.use(express.json());
+
 const port = process.env.PORT || '80';
 
 console.log(`Running in ${process.env.NODE_ENV} mode`);
@@ -23,12 +25,18 @@ if (!process.env.VCS_API_KEY) {
 }
 console.log('VCS_API_KEY:', process.env.VCS_API_KEY);
 
+// Setup CORS to allow only origin
+app.use(cors({
+  origin: (origin, callback) => callback(null, [origin]),
+  credentials: true
+}));
 
 if (process.env.NODE_ENV === 'production') {
+  // Host web app
   app.use(express.static(path.join(__dirname, '../frontend/dist')));
 } else {
+  // In development ignore certificate error
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-  app.use(cors());
 }
 
 // Rooms: key=name
@@ -40,8 +48,7 @@ app.use('/api/', rateLimit({
   message: 'Too many accounts created from this IP, please try again after an hour'
 }));
 
-app.options('/api/room', cors());
-app.post('/api/room', cors(), async (req, res) => {
+app.post('/api/room', basicAuth(), async (req, res) => {
   try {
     const room = rooms[req.body.name.toLowerCase()];
     if (room) {
@@ -58,7 +65,7 @@ app.post('/api/room', cors(), async (req, res) => {
       body: JSON.stringify({ name: req.body.name })
     });
     if (!result.ok) {
-      throw `${result.status} ${result.statusText}`;
+      throw new Error(`${result.status} ${result.statusText}`);
     }
     result = await result.json();
     result.domain = process.env.VCS_HOST;
@@ -71,7 +78,7 @@ app.post('/api/room', cors(), async (req, res) => {
   }
 });
 
-app.get('/api/room', cors(), (req, res) => {
+app.get('/api/room', (req, res) => {
   if (req.query.name) {
     const room = rooms[req.query.name.toLowerCase()];
     if (!room) {
@@ -93,9 +100,10 @@ app.get('/api/rooms', (req, res) => {
   res.json(r);
 });
 
-app.get('/api/config', cors(), (req, res) => {
+app.get('/api/config', (req, res) => {
   const config = {
-    VCS_HOST: process.env.VCS_HOST
+    VCS_HOST: process.env.VCS_HOST,
+    AUTH_TYPE: process.env.AUTH_TYPE || 'NONE'
   };
   console.log('Return configuration: ', config);
   res.json(config);

@@ -110,6 +110,7 @@ export default {
   data() {
     return {
       roomName: null,
+      countries: [],
       user: {},
       mediaPreselection: 'both',
       version: '',
@@ -117,7 +118,10 @@ export default {
     };
   },
 
-  created() {
+  async created() {
+    // Fetch config backend
+    await this.$store.dispatch('fetchConfig');
+
     this.roomName = this.$store.state.activeRoom || randomWords({ exactly: 1, maxLength: 5, wordsPerString: 2, separator:' ' })[0];
 
     this.countries = Object.keys(countries)
@@ -129,6 +133,7 @@ export default {
       this.user.country = navigator.language.toUpperCase().split('-')[1];
     }
   },
+
   methods: {
     join(create) {
       this.$store

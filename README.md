@@ -31,7 +31,6 @@ Contact the system administrator of your VCS system to obtain a VCS API key and 
 
 Set the `VITE_APP_SERVER` parameter in file `/frontend/.env` to `localhost:3001`. This tells your web app where the Application server is hosted at.
 
-
 ### Start the app
 
 There are no other dependencies to run the app locally. Once you add the API key as explained above, start the backend and frontend. The application is available at <http://localhost:3000/>.
@@ -42,6 +41,10 @@ npm run dev
 
 # Navigate to http://localhost:3000/
 ```
+
+### Authentication
+
+By default there is no authentication required to access the `POST /room` endpoint to create rooms. Basic Authentication can be configured in the backend and frontend env files. Set the backend env property `AUTH_TYPE`to `BASIC_AUTH`, and then configure the credentials of a user that has permissions to create rooms via env properties `BASIC_AUTH_USER` & `BASIC_AUTH_PASSWORD`.
 
 ## More information
 
