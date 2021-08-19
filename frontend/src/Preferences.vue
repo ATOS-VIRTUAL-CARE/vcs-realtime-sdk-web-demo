@@ -1,5 +1,5 @@
 <template>
-  <dialog ref="dialog">
+  <dialog ref="dialog" style="width: 500px">
     <form class="pure-form pure-form-aligned">
       <fieldset>
         <legend>Preferred Devices</legend>
@@ -71,6 +71,11 @@ export default {
   async created() {
     this.devices = await Device.getDevices();
     this.agc = Device.autoGainControl;
+  },
+
+  mounted() {
+    const dialog = document.querySelector('dialog');
+    dialogPolyfill.registerDialog(dialog);
   },
 
   methods: {
