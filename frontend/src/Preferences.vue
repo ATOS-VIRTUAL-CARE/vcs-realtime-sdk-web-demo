@@ -1,5 +1,5 @@
 <template>
-  <dialog ref="dialog" style="width: 500px">
+  <dialog ref="dialog" style="width: 600px">
     <form class="pure-form pure-form-aligned">
       <fieldset>
         <legend>Preferred Devices</legend>
@@ -26,6 +26,19 @@
         </div>
       </fieldset>
       <fieldset>
+        <legend>Video Settings</legend>
+        <div class="pure-control-group">
+          <label>Preferred video codec</label>
+          <select class="pure-input-1-2" ref="videocodec" @change="setPreferredVideoCodec()">
+            <option v-for="codec in ['VP8', 'VP9', 'H264']" :selected="videocodec === codec" :value="codec">{{ codec }}</option>
+          </select>
+        </div>
+        <div class="pure-control-group">
+          <label>Use HD video by default </label>
+          <input type="checkbox" :checked="defaultHdVideo" @click="setDefaultHdVideo" />
+        </div>
+      </fieldset>
+      <fieldset>
         <legend>Audio Settings</legend>
         <div class="pure-control-group">
           <label>Auto Gain Control</label>
@@ -44,8 +57,8 @@ dialog {
   border: none;
   box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
   border-radius: 5px;
-  .device {
-    width: 100%;
+  .pure-form-aligned .pure-control-group label {
+    width: 15em;
   }
   menu {
     text-align: right;
@@ -58,19 +71,23 @@ dialog {
 </style>
 
 <script>
-import { Device } from 'vcs-realtime-sdk';
+import { Device, Settings } from 'vcs-realtime-sdk';
 
 export default {
   data() {
     return {
       devices: [],
-      agc: false
+      videocodec: '',
+      agc: false,
+      defaultHdVideo: false
     };
   },
 
   async created() {
     this.devices = await Device.getDevices();
+    this.videocodec = Settings.preferredVideoCodec;
     this.agc = Device.autoGainControl;
+    this.defaultHdVideo = Settings.defaultHdVideo;
   },
 
   mounted() {
@@ -85,6 +102,12 @@ export default {
     setPreferredDevice(kind) {
       const deviceId = this.$refs[kind].value;
       Device.setPreferredDevice(deviceId, kind);
+    },
+    setPreferredVideoCodec() {
+      Settings.preferredVideoCodec = this.$refs['videocodec'].value;
+    },
+    setDefaultHdVideo(e) {
+      Settings.defaultHdVideo = !!e.target.checked;
     },
     setAgc(e) {
       Device.autoGainControl = !!e.target.checked;
