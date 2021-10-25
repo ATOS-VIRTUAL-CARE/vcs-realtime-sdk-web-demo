@@ -1,40 +1,40 @@
 <template>
   <div v-if="room" ref="room" class="room" :class="{ mobile }">
     <div class="text">
-      <div v-if="room.name">Room: {{ room.name }}</div>
+      <div data-autotest="displayedRoomName" v-if="room.name">Room: {{ room.name }}</div>
     </div>
     <div class="actions">
-      <button @click="switchCamera" v-if="mobile" class="pure-button pure-button-primary switch-camera">
+      <button data-autotest="toggleCamera" @click="switchCamera" v-if="mobile" class="pure-button pure-button-primary switch-camera">
         <svg-icon type="mdi" :path="mdiCameraFlip"></svg-icon>
       </button>
-      <button @click="toggleVideo" class="pure-button pure-button-primary toggle-video">
+      <button data-autotest="toggleVideo" @click="toggleVideo" class="pure-button pure-button-primary toggle-video">
         <svg-icon v-if="hasVideo" type="mdi" :path="mdiVideo"></svg-icon>
         <svg-icon v-else type="mdi" :path="mdiVideoOff"></svg-icon>
       </button>
-      <button @click="leave" class="pure-button pure-button-primary hangup">
+      <button data-autotest="hangUp" @click="leave" class="pure-button pure-button-primary hangup">
         <svg-icon type="mdi" :path="mdiPhoneHangup"></svg-icon>
       </button>
-      <button @click="toggleMute" class="pure-button pure-button-primary toggle-mic">
+      <button data-autotest="toggleMute" @click="toggleMute" class="pure-button pure-button-primary toggle-mic">
         <svg-icon v-if="isMuted" type="mdi" :path="mdiMicrophoneOff"></svg-icon>
         <svg-icon v-else type="mdi" :path="mdiMicrophone"></svg-icon>
       </button>
     </div>
-    <div id="localStream" ref="localStream"></div>
+    <div data-autotest="localParticipantVideo" id="localStream" ref="localStream"></div>
     <div class="call-stage">
       <div v-for="participant in room.remoteParticipants" :key="participant.address">
         <div class="text">
           <img alt="" class="flag" v-if="getFlag(participant)" :src="getFlag(participant)" />
-          <div>{{ participant.name }}</div>
+          <div data-autotest="displayedUser">{{ participant.name }}</div>
         </div>
         <div class="video">
-          <video :id="`video-${participant.address}`" autoplay playsinline></video>
+          <video data-autotest="remoteParticipantVideo" :id="`video-${participant.address}`" autoplay playsinline></video>
         </div>
       </div>
     </div>
   </div>
   <div v-else-if="error" class="error">
     <div>{{ error }}</div>
-    <button class="pure-button pure-button-primary" @click="$router.push('/')">Start over</button>
+    <button data-autotest="errorButton" class="pure-button pure-button-primary" @click="$router.push('/')">Start over</button>
   </div>
 </template>
 

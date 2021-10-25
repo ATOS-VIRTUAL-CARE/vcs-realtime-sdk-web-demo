@@ -16,30 +16,30 @@
     <div class="pure-form pure-form-aligned">
       <div class="pure-control-group">
         <label>Room name</label>
-        <input v-model="roomName" />
+        <input data-autotest="roomName" v-model="roomName" />
         <span class="pure-form-message-inline">This is a required field.</span>
       </div>
       <div class="pure-control-group">
         <label>Your name</label>
-        <input v-model="user.name" />
+        <input data-autotest="user" v-model="user.name" />
       </div>
       <div class="pure-control-group">
         <label>Your country</label>
-        <select v-model="user.country">
-          <option v-for="country in countries" :key="country.id" :value="country.id">{{ country.name }}</option>
+        <select data-autotest="selectCountry" v-model="user.country">
+          <option data-autotest="country" v-for="country in countries" :key="country.id" :value="country.id">{{ country.name }}</option>
         </select>
       </div>
       <div class="pure-control-group">
         <label>Join with</label>
-        <select v-model="mediaPreselection">
-          <option value="both">audio and video</option>
-          <option value="audio">audio only</option>
-          <option value="video">video only</option>
+        <select data-autotest="roomType" v-model="mediaPreselection">
+          <option data-autotest="both" dvalue="both">audio and video</option>
+          <option data-autotest="audio" value="audio">audio only</option>
+          <option data-autotest="video" value="video">video only</option>
         </select>
       </div>
       <div class="pure-controls">
-        <button @click="join(true)" :disabled="!roomName" class="pure-button pure-button-primary">Create room</button>
-        <button @click="join()" :disabled="!roomName" class="pure-button pure-button-primary">Join room</button>
+        <button data-autotest="createRoom" @click="join(true)" :disabled="!roomName" class="pure-button pure-button-primary">Create room</button>
+        <button data-autotest="joinRoom" @click="join()" :disabled="!roomName" class="pure-button pure-button-primary">Join room</button>
       </div>
     </div>
     <div class="spacer"></div>
