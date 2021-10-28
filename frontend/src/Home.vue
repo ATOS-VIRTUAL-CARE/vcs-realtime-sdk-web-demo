@@ -32,7 +32,7 @@
       <div class="pure-control-group">
         <label>Join with</label>
         <select data-autotest="roomType" v-model="mediaPreselection">
-          <option data-autotest="both" dvalue="both">audio and video</option>
+          <option data-autotest="both" value="both">audio and video</option>
           <option data-autotest="audio" value="audio">audio only</option>
           <option data-autotest="video" value="video">video only</option>
         </select>
