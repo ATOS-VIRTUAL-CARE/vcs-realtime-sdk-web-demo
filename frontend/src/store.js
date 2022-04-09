@@ -1,4 +1,6 @@
 import { createStore } from 'vuex';
+import Preferences from './Preferences.vue';
+
 const backend = import.meta.env.VITE_APP_SERVER ? `http://${import.meta.env.VITE_APP_SERVER}` : window.origin;
 
 const store = createStore({
@@ -45,6 +47,7 @@ const store = createStore({
   actions: {
     async createRoom({ state, commit }, name) {
       const isBasicAuth = state.config.AUTH_TYPE === 'BASIC_AUTH';
+      const conferenceType = state.conferenceRoomType || 'MESH';
 
       // Ask application server to create a room
       const headers = { 'content-type': 'application/json' };
@@ -53,7 +56,7 @@ const store = createStore({
         method: 'post',
         headers,
         credentials: isBasicAuth ? 'include' : 'omit',
-        body: JSON.stringify({ name })
+        body: JSON.stringify({ name, conferenceType })
       });
       if (!res.ok) {
         if (res.status === 409) {
