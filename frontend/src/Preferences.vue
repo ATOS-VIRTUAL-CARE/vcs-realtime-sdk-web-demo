@@ -2,6 +2,15 @@
   <dialog ref="dialog" style="width: 600px">
     <form class="pure-form pure-form-aligned">
       <fieldset>
+        <legend>Room Settings</legend>
+        <div class="pure-control-group">
+          <label>Conference Room Type</label>
+          <select class="pure-input-1-2" ref="conferenceRoomType" @change="setConferenceRoomType()">
+            <option v-for="roomType in ['MESH', 'SFU']" :selected="conferenceRoomType === roomType" :value="roomType">{{ roomType }}</option>
+          </select>
+        </div>
+      </fieldset>
+      <fieldset>
         <legend>Preferred Devices</legend>
         <div class="pure-control-group">
           <label>Microphone</label>
@@ -79,7 +88,8 @@ export default {
       devices: [],
       videocodec: '',
       agc: false,
-      defaultHdVideo: false
+      defaultHdVideo: false,
+      conferenceRoomType: ''
     };
   },
 
@@ -88,6 +98,7 @@ export default {
     this.videocodec = Settings.preferredVideoCodec;
     this.agc = Device.autoGainControl;
     this.defaultHdVideo = Settings.defaultHdVideo;
+    this.conferenceRoomType = 'MESH';
   },
 
   mounted() {
@@ -111,6 +122,10 @@ export default {
     },
     setAgc(e) {
       Device.autoGainControl = !!e.target.checked;
+    },
+    setConferenceRoomType() {
+      this.conferenceRoomType = this.$refs['conferenceRoomType'].value;
+      this.$store.state.conferenceRoomType = this.conferenceRoomType;
     }
   }
 };
