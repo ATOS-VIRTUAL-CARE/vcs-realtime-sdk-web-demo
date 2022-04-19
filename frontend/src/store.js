@@ -1,5 +1,4 @@
 import { createStore } from 'vuex';
-import Preferences from './Preferences.vue';
 
 const backend = import.meta.env.VITE_APP_SERVER ? `http://${import.meta.env.VITE_APP_SERVER}` : window.origin;
 
