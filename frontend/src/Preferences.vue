@@ -6,7 +6,7 @@
         <div class="pure-control-group">
           <label>Conference Room Type</label>
           <select class="pure-input-1-2" ref="conferenceRoomType" @change="setConferenceRoomType()">
-            <option v-for="roomType in ['MESH', 'SFU']" :selected="conferenceRoomType === roomType" :value="roomType">{{ roomType }}</option>
+            <option v-for="roomType in ['MESH (E2E encrypted conference)', 'SFU (Server-based conference)']" :selected="conferenceRoomType === roomType" :value="roomType">{{ roomType }}</option>
           </select>
         </div>
       </fieldset>
