@@ -101,11 +101,6 @@ export default {
     this.conferenceRoomType = 'MESH';
   },
 
-  mounted() {
-    const dialog = document.querySelector('dialog');
-    dialogPolyfill.registerDialog(dialog);
-  },
-
   methods: {
     async show() {
       this.$refs.dialog.showModal();

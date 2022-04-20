@@ -1,6 +1,6 @@
 {
   "name": "vcs-realtime-sdk-demo-frontend",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "author": "roger.urscheler@atos.net",
   "license": "Apache-2.0",
   "scripts": {
@@ -14,7 +14,7 @@
     "@mdi/js": "5.9.55",
     "countries-list": "2.6.1",
     "random-words": "1.1.2",
-    "vcs-realtime-sdk": "https://sdk.virtualcareservices.net/dist/vcs-realtime-sdk-0.8.2.tgz",
+    "vcs-realtime-sdk": "https://sdk.virtualcareservices.net/dist/vcs-realtime-sdk.tgz",
     "vue": "3.0.7",
     "vue-router": "4.0.5",
     "vuex": "4.0.0"
