@@ -14,7 +14,7 @@
       <button data-autotest="hangUp" @click="leave" class="pure-button pure-button-primary hangup">
         <svg-icon type="mdi" :path="mdiPhoneHangup"></svg-icon>
       </button>
-      <button data-autotest="toggleMute" @click="toggleMute" class="pure-button pure-button-primary toggle-mic">
+      <button data-autotest="toggleMicrophone" @click="toggleMute" class="pure-button pure-button-primary toggle-mic">
         <svg-icon v-if="isMuted" type="mdi" :path="mdiMicrophoneOff"></svg-icon>
         <svg-icon v-else type="mdi" :path="mdiMicrophone"></svg-icon>
       </button>
