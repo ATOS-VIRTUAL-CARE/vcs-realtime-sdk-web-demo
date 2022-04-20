@@ -1,10 +1,15 @@
-require('dotenv-flow').config();
-const express = require('express');
-const cors = require('cors');
-const fetch = require('node-fetch');
-const path = require('path');
-const rateLimit = require('express-rate-limit');
-const { basicAuth } = require('./auth');
+import dotenv from 'dotenv-flow';
+dotenv.config();
+import express from 'express';
+import cors from 'cors';
+import fetch from 'node-fetch';
+import path from 'path';
+import rateLimit from 'express-rate-limit';
+import { basicAuth } from './auth.js';
+
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 app.use(express.json());

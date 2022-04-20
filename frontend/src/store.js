@@ -86,20 +86,22 @@ const store = createStore({
       return res.room.token;
     },
     async fetchConfig({ state }) {
-      let res = await fetch(`${backend}/api/config`, {
-        method: 'get',
-        headers: { 'content-type': 'application/json' }
-      });
-      if (!res.ok) {
-        if (res.status === 404) {
-          throw new Error('Config not found');
-        } else {
-          throw new Error('Error fetching config. VCS system might be down at this time.');
+      if (!state.config) {
+        let res = await fetch(`${backend}/api/config`, {
+          method: 'get',
+          headers: { 'content-type': 'application/json' }
+        });
+        if (!res.ok) {
+          if (res.status === 404) {
+            throw new Error('Config not found');
+          } else {
+            throw new Error('Error fetching config. VCS system might be down at this time.');
+          }
         }
+        res = await res.json();
+        state.config = res;
+        console.log('Fetched config', res);
       }
-      res = await res.json();
-      state.config = res;
-      console.log('Fetched config', res);
     }
   }
 });
