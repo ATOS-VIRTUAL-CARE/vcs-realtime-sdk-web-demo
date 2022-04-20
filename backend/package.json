@@ -6,15 +6,16 @@
   "scripts": {
     "start": "node index.js"
   },
+  "type": "module",
   "keywords": [],
   "author": "roger.urscheler@atos.net",
   "license": "Apache-2.0",
   "dependencies": {
     "cors": "2.8.5",
     "dotenv-flow": "3.2.0",
-    "express": "4.17.1",
-    "express-basic-auth": "1.2.0",
-    "express-rate-limit": "5.2.6",
-    "node-fetch": "2.6.7"
+    "express": "4.17.3",
+    "express-basic-auth": "1.2.1",
+    "express-rate-limit": "6.3.0",
+    "node-fetch": "3.2.3"
   }
 }

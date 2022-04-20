@@ -1,4 +1,4 @@
-const basicAuth = require('express-basic-auth');
+import basicAuth from 'express-basic-auth';
 
 const basicAuthUsers = {};
 basicAuthUsers[process.env.BASIC_AUTH_USER] = process.env.BASIC_AUTH_PASSWORD;
@@ -17,6 +17,6 @@ function basicAuthMw() {
   };
 }
 
-module.exports = {
-  basicAuth: basicAuthMw
+export {
+  basicAuthMw as basicAuth
 }

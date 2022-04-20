@@ -195,6 +195,9 @@ export default {
         this.$router.push('/');
       }
 
+      // Make sure config is loaded
+      await this.$store.dispatch('fetchConfig');
+
       let token = this.$store.state.tokens[room];
       if (!token) {
         // Fetch room. This may be a navigation directly to this url.
