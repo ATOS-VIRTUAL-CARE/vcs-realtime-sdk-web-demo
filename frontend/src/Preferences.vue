@@ -5,8 +5,8 @@
         <legend>Room Settings</legend>
         <div class="pure-control-group">
           <label>Conference Room Type</label>
-          <select class="pure-input-1-2" ref="conferenceRoomType" @change="setConferenceRoomType()">
-            <option v-for="roomType in ['MESH (E2E encrypted conference)', 'SFU (Server-based conference)']" :selected="conferenceRoomType === roomType" :value="roomType">{{ roomType }}</option>
+          <select class="pure-input-1-2" ref="conferenceRoomType" v-model="conferenceRoomType" @change="setConferenceRoomType()">
+            <option v-for="roomType in roomTypes" :value="roomType.value">{{ roomType.label }}</option>
           </select>
         </div>
       </fieldset>
@@ -82,6 +82,14 @@ dialog {
 <script>
 import { Device, Settings } from 'vcs-realtime-sdk';
 
+const ROOM_TYPES = [{
+  label: 'MESH (E2E encrypted conference)',
+  value:'MESH'
+}, {
+  label: 'SFU (Server-based conference)',
+  value:'SFU'
+}];
+
 export default {
   data() {
     return {
@@ -89,7 +97,8 @@ export default {
       videocodec: '',
       agc: false,
       defaultHdVideo: false,
-      conferenceRoomType: ''
+      conferenceRoomType: 'MESH',
+      roomTypes: ROOM_TYPES
     };
   },
 
@@ -98,7 +107,6 @@ export default {
     this.videocodec = Settings.preferredVideoCodec;
     this.agc = Device.autoGainControl;
     this.defaultHdVideo = Settings.defaultHdVideo;
-    this.conferenceRoomType = 'MESH';
   },
 
   methods: {
@@ -119,7 +127,6 @@ export default {
       Device.autoGainControl = !!e.target.checked;
     },
     setConferenceRoomType() {
-      this.conferenceRoomType = this.$refs['conferenceRoomType'].value;
       this.$store.state.conferenceRoomType = this.conferenceRoomType;
     }
   }
