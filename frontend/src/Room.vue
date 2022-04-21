@@ -240,7 +240,7 @@ export default {
       });
 
       this.room.on('remoteAudioStream', stream => {
-        const el = this.$refs.room.querySelector(`#audio`);
+        const el = this.$refs.room.querySelector('#audio');
         el && (el.srcObject = stream);
       });
 
