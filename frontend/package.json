@@ -14,7 +14,7 @@
     "@mdi/js": "6.6.96",
     "countries-list": "2.6.1",
     "random-words": "1.1.2",
-    "vcs-realtime-sdk": "https://sdk.virtualcareservices.net/dist/vcs-realtime-sdk.tgz",
+    "vcs-realtime-sdk": "file:vcs-realtime-sdk-0.8.2.tgz",
     "vue": "3.2.33",
     "vue-router": "4.0.14",
     "vuex": "4.0.2"

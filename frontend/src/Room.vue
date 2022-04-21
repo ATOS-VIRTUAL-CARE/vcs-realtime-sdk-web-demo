@@ -19,7 +19,7 @@
         <svg-icon v-else type="mdi" :path="mdiMicrophone"></svg-icon>
       </button>
     </div>
-    <audio id="audio" ref="audio" hidden autoplay></audio>
+    <audio id="audio" ref="audio" autoplay></audio>
     <div data-autotest="localParticipantVideo" id="localStream" ref="localStream"></div>
     <div class="call-stage">
       <div v-for="participant in room.remoteParticipants" :key="participant.address">
