@@ -19,6 +19,7 @@
         <svg-icon v-else type="mdi" :path="mdiMicrophone"></svg-icon>
       </button>
     </div>
+    <audio id="audio" ref="audio" hidden autoplay></audio>
     <div data-autotest="localParticipantVideo" id="localStream" ref="localStream"></div>
     <div class="call-stage">
       <div v-for="participant in room.remoteParticipants" :key="participant.address">
@@ -236,6 +237,11 @@ export default {
       this.room.on('remoteStream', p => {
         const el = this.$refs.room.querySelector(`#video-${p.address}`);
         el && (el.srcObject = p.mediaStream);
+      });
+
+      this.room.on('remoteAudioStream', stream => {
+        const el = this.$refs.room.querySelector(`#audio`);
+        el && (el.srcObject = stream);
       });
 
       // Create new video element, or remove video element via v-for binding
