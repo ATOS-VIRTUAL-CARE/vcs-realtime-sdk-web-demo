@@ -1,4 +1,6 @@
 <template>
+  <Chat ref="chat" :participants="room?.remoteParticipants" @send="sendMessage"></Chat>
+
   <div v-if="room" ref="room" class="room" :class="{ mobile }">
     <div class="text">
       <div data-autotest="displayedRoomName" v-if="room.name">Room: {{ room.name }}</div>
@@ -17,6 +19,9 @@
       <button data-autotest="toggleMicrophone" @click="toggleMute" class="pure-button pure-button-primary toggle-mic">
         <svg-icon v-if="isMuted" type="mdi" :path="mdiMicrophoneOff"></svg-icon>
         <svg-icon v-else type="mdi" :path="mdiMicrophone"></svg-icon>
+      </button>
+      <button @click="$refs.chat.show()" class="pure-button pure-button-primary chat">
+        <svg-icon type="mdi" :path="mdiChat"></svg-icon>
       </button>
     </div>
     <audio id="audio" ref="audio" autoplay></audio>
@@ -153,7 +158,8 @@ button {
 import { nextTick } from 'vue';
 import { joinRoom } from 'vcs-realtime-sdk';
 import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiVideo, mdiVideoOff, mdiMicrophone, mdiMicrophoneOff, mdiPhoneHangup, mdiCameraFlip } from '@mdi/js';
+import { mdiVideo, mdiVideoOff, mdiMicrophone, mdiMicrophoneOff, mdiPhoneHangup, mdiCameraFlip, mdiChat } from '@mdi/js';
+import Chat from './Chat.vue';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -163,6 +169,7 @@ function getRandomInt(min, max) {
 
 export default {
   components: {
+    Chat,
     SvgIcon
   },
 
@@ -177,7 +184,8 @@ export default {
       mdiMicrophone,
       mdiMicrophoneOff,
       mdiPhoneHangup,
-      mdiCameraFlip
+      mdiCameraFlip,
+      mdiChat
     };
   },
 
@@ -244,6 +252,10 @@ export default {
         el && (el.srcObject = stream);
       });
 
+      this.room.on('messageReceived', (participant, data) => {
+        alert(`Participant ${participant.address} sent message: ${data}`);
+      });
+
       // Create new video element, or remove video element via v-for binding
       this.room.on('participantJoined', this.$forceUpdate);
       this.room.on('participantLeft', this.$forceUpdate);
@@ -275,6 +287,9 @@ export default {
       setTimeout(() => {
         this.$router.push('/');
       }, 300);
+    },
+    async sendMessage({ message, participants }) {
+      await this.room.sendMessageToParticipant(message, participants);
     },
     isMobile() {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
