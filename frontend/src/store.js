@@ -6,6 +6,7 @@ const store = createStore({
   state() {
     return {
       activeRoom: null,
+      conferenceRoomType: 'MESH',
       mediaPreselection: null,
       user: null,
       tokens: {},
@@ -46,7 +47,6 @@ const store = createStore({
   actions: {
     async createRoom({ state, commit }, name) {
       const isBasicAuth = state.config.AUTH_TYPE === 'BASIC_AUTH';
-      const conferenceType = state.conferenceRoomType?.startsWith('SFU') ? 'SFU' : 'MESH';
 
       // Ask application server to create a room
       const headers = { 'content-type': 'application/json' };
@@ -55,7 +55,7 @@ const store = createStore({
         method: 'post',
         headers,
         credentials: isBasicAuth ? 'include' : 'omit',
-        body: JSON.stringify({ name, conferenceType })
+        body: JSON.stringify({ name, conferenceType: state.conferenceRoomType })
       });
       if (!res.ok) {
         if (res.status === 409) {
