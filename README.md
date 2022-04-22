@@ -62,6 +62,36 @@ npm run dev
 # Navigate to http://localhost:3000/
 ```
 
+### HTTPS
+
+In some cases you might want to serve the backend via HTTPS so that external devices can easier connect to the backend. And you may also want to serve the frontend on https for camera access reasons.
+
+#### Serve backend on https
+
+In the backend `.env` file uncomment HTTPS and set certificate and private key file names. These files should be added to the `backend/cert` folder.
+
+backend `.env` file:
+
+```env
+# Serve as HTTPS for development with mobile devices.
+# Make sure to use https setting in frontend when setting HTTPS=true here
+HTTPS=true
+CERT_FILE=tls.crt
+KEY_FILE=tls.key
+```
+
+In the fontend `.env` file make sure to use https for VITE_APP_SERVER.
+
+frontend `.env` file:
+
+```env
+VITE_APP_SERVER=https://localhost:3001
+```
+
+#### Serve frontend on https
+
+To serve the frontend on https, run the app via `npm run dev:https` instead.
+
 ### Authentication
 
 By default there is no authentication required to access the `POST /room` endpoint to create rooms. Basic Authentication can be configured in the backend and frontend env files. Set the backend env property `AUTH_TYPE`to `BASIC_AUTH`, and then configure the credentials of a user that has permissions to create rooms via env properties `BASIC_AUTH_USER` & `BASIC_AUTH_PASSWORD`.
@@ -73,5 +103,5 @@ Where to find more information about the VCS Realtime SDKs and APIs.
 - [Main page for the VCS SDKs and APIs](https://sdk.virtualcareservices.net/)
 - [An overview of how application servers and clients work together to create audio/video sessions](https://sdk.virtualcareservices.net/guide/#overview)
 - [JavaScript SDK documentation](https://sdk.virtualcareservices.net/sdks/js/)
-- [iOS  SDK documentation](https://sdk.virtualcareservices.net/sdks/ios/)
+- [iOS SDK documentation](https://sdk.virtualcareservices.net/sdks/ios/)
 - [Android SDK documentation](https://sdk.virtualcareservices.net/sdks/android/)

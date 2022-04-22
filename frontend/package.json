@@ -1,6 +1,6 @@
 {
   "name": "vcs-realtime-sdk-demo-frontend",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "author": "roger.urscheler@atos.net",
   "license": "Apache-2.0",
   "scripts": {
