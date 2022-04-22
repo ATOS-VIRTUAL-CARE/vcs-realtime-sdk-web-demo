@@ -1,6 +1,8 @@
+todo.md
 node_modules
-.DS_Store
-dist
-dist-ssr
-*.local
-vcs-realtime-sdk*.tgz
+frontend/dist
+**/.DS_Store
+**/.env.**
+app.yaml
+dispatch.yaml
+backend/cert/*

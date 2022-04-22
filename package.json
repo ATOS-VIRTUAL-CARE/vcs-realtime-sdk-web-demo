@@ -8,6 +8,7 @@
     "postinstall": "(cd backend && npm install); (cd frontend && npm install --force)",
     "start": "cd backend && NODE_ENV=production npm start",
     "dev": "(cd backend && NODE_ENV=development npm start&); (cd frontend && npm run dev)",
+    "dev:https": "(cd backend && NODE_ENV=development npm start&); (cd frontend && npm run dev -- --https)",
     "build:frontend": "cd frontend && npm run build",
     "deploy:gcp": "NODE_ENV=production npm run build:frontend && gcloud app deploy --quiet"
   },

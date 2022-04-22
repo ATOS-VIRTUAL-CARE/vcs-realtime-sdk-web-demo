@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 
-const backend = import.meta.env.VITE_APP_SERVER ? `http://${import.meta.env.VITE_APP_SERVER}` : window.origin;
+const backend = import.meta.env.VITE_APP_SERVER || window.origin;
 
 const store = createStore({
   state() {

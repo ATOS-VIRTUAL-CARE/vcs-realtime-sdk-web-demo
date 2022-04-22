@@ -6,6 +6,8 @@ import fetch from 'node-fetch';
 import path from 'path';
 import rateLimit from 'express-rate-limit';
 import { basicAuth } from './auth.js';
+import fs from 'fs';
+import https from 'https';
 
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
@@ -19,23 +21,25 @@ const port = process.env.PORT || '80';
 console.log(`Running in ${process.env.NODE_ENV} mode`);
 
 if (!process.env.VCS_HOST) {
-  console.error('VCS_HOST env variable is missing.')
+  console.error('VCS_HOST env variable is missing.');
   process.exit(1);
 }
 console.log('VCS_HOST:', process.env.VCS_HOST);
 
 if (!process.env.VCS_API_KEY) {
-  console.error('VCS_API_KEY env variable is missing.')
+  console.error('VCS_API_KEY env variable is missing.');
   process.exit(1);
 }
 console.log('VCS_API_KEY:', process.env.VCS_API_KEY);
 console.log('VCS_AUTH_TYPE:', process.env.VCS_AUTH_TYPE);
 
 // Setup CORS to allow only origin
-app.use(cors({
-  origin: (origin, callback) => callback(null, [origin]),
-  credentials: true
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => callback(null, [origin]),
+    credentials: true
+  })
+);
 
 if (process.env.NODE_ENV === 'production') {
   // Host web app
@@ -48,11 +52,14 @@ if (process.env.NODE_ENV === 'production') {
 // Rooms: key=name
 const rooms = {};
 
-app.use('/api/', rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
-  message: 'Too many accounts created from this IP, please try again after an hour'
-}));
+app.use(
+  '/api/',
+  rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100,
+    message: 'Too many accounts created from this IP, please try again after an hour'
+  })
+);
 
 app.post('/api/room', basicAuth(), async (req, res) => {
   try {
@@ -121,6 +128,19 @@ app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend/dist/index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server running on port: ${port}`);
-});
+let options = null;
+if (process.env.HTTPS) {
+  https
+    .createServer(
+      {
+        cert: fs.readFileSync(path.join(__dirname, './cert/tls.crt'), 'UTF-8'),
+        key: fs.readFileSync(path.join(__dirname, './cert/tls.key'), 'UTF-8')
+      },
+      app
+    )
+    .listen(port, () => console.log(`Server running on port ${port}`));
+} else {
+  app.listen(port, () => {
+    console.log(`Server running on port: ${port}`);
+  });
+}
