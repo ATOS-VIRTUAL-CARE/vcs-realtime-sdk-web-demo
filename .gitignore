@@ -5,3 +5,4 @@ frontend/dist
 **/.env.**
 app.yaml
 dispatch.yaml
+backend/cert/*
