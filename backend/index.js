@@ -32,6 +32,8 @@ if (!process.env.VCS_API_KEY) {
 }
 console.log('VCS_API_KEY:', process.env.VCS_API_KEY);
 console.log('VCS_AUTH_TYPE:', process.env.VCS_AUTH_TYPE);
+console.log('HTTPS:', process.env.HTTPS);
+console.log('PORT:', process.env.PORT);
 
 // Setup CORS to allow only origin
 app.use(
@@ -138,7 +140,7 @@ if (process.env.HTTPS) {
       },
       app
     )
-    .listen(port, () => console.log(`Server running on port ${port}`));
+    .listen(port, () => console.log(`Server running with https on port ${port}`));
 } else {
   app.listen(port, () => {
     console.log(`Server running on port: ${port}`);
