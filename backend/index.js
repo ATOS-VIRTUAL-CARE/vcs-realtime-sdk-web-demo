@@ -138,7 +138,7 @@ if (process.env.HTTPS) {
       },
       app
     )
-    .listen(port, () => console.log(`Server running on port ${port}`));
+    .listen(port, () => console.log(`Server running with https on port ${port}`));
 } else {
   app.listen(port, () => {
     console.log(`Server running on port: ${port}`);

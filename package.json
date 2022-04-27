@@ -5,10 +5,12 @@
   "author": "roger.urscheler@atos.net",
   "license": "Apache-2.0",
   "scripts": {
-    "postinstall": "(cd backend && npm install); (cd frontend && npm install --force)",
-    "start": "cd backend && NODE_ENV=production npm start",
-    "dev": "(cd backend && NODE_ENV=development npm start&); (cd frontend && npm run dev)",
-    "dev:https": "(cd backend && NODE_ENV=development npm start&); (cd frontend && npm run dev -- --https)",
+    "postinstall": "cd backend && npm install && cd ../frontend && npm install --force",
+    "start": "cd backend && cross-env NODE_ENV=production npm start",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:frontend:https": "cd frontend && npm run dev -- --https",
+    "dev": "npm-run-all start start:frontend",
+    "dev:https": "npm-run-all start start:frontend:https",
     "build:frontend": "cd frontend && npm run build",
     "deploy:gcp": "NODE_ENV=production npm run build:frontend && gcloud app deploy --quiet"
   },
@@ -17,5 +19,9 @@
     "registry": "https://npm.pkg.github.com"
   },
   "keywords": [],
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "npm-run-all": "^4.1.5"
+  }
 }
