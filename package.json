@@ -10,8 +10,8 @@
     "start:backend": "cd backend && npm start",
     "start:frontend": "cd frontend && npm run dev",
     "start:frontend:https": "cd frontend && npm run dev -- --https",
-    "dev": "npm-run-all start:backend start:frontend",
-    "dev:https": "npm-run-all start:backend start:frontend:https",
+    "dev": "run-p start:backend start:frontend",
+    "dev:https": "run-p start:backend start:frontend:https",
     "build:frontend": "cd frontend && npm run build",
     "deploy:gcp": "NODE_ENV=production npm run build:frontend && gcloud app deploy --quiet"
   },
