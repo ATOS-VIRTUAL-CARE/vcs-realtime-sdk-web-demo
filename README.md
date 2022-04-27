@@ -42,13 +42,13 @@ PORT=3001
 
 #### Frontend Vue app
 
-Set the `VITE_APP_SERVER` parameter in file `/frontend/.env` to `localhost:3001`. This tells your web app where the Application server is hosted at.
+Set the `VITE_APP_SERVER` parameter in file `/frontend/.env` to `http://localhost:3001`. This tells your web app where the Application server is hosted at.
 
 E.g.:
 
 ```env
 # So in development set to localhost:3001 for example
-VITE_APP_SERVER=localhost:3001
+VITE_APP_SERVER=http://localhost:3001
 ```
 
 ### Start the app
