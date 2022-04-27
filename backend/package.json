@@ -1,6 +1,6 @@
 {
   "name": "vcs-realtime-sdk-demo-backend",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Express app to create rooms and host static vue app",
   "main": "index.js",
   "scripts": {

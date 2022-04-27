@@ -1,6 +1,6 @@
 {
   "name": "@atos-virtual-care/vcs-realtime-sdk-web-demo",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Example app for vcs-realtime-sdk with vuejs",
   "author": "roger.urscheler@atos.net",
   "license": "Apache-2.0",
