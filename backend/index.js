@@ -71,7 +71,7 @@ app.post('/api/room', basicAuth(), async (req, res) => {
       res.status(409).send(`Room "${req.body.name}" already exists`);
       return;
     }
-    let result = await fetch(`https://${process.env.VCS_HOST}/api/realtime/vcs/api/room`, {
+    let result = await fetch(`https://${process.env.VCS_HOST}/api/realtime/room`, {
       method: 'post',
       headers: {
         'content-type': 'application/json',
