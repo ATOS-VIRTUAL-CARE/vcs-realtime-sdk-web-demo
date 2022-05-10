@@ -7,6 +7,7 @@ const store = createStore({
     return {
       activeRoom: null,
       conferenceRoomType: 'MESH',
+      upgradeOnParticipant: 0,
       mediaPreselection: null,
       user: null,
       tokens: {},
@@ -55,7 +56,7 @@ const store = createStore({
         method: 'post',
         headers,
         credentials: isBasicAuth ? 'include' : 'omit',
-        body: JSON.stringify({ name, conferenceType: state.conferenceRoomType })
+        body: JSON.stringify({ name, conferenceType: state.conferenceRoomType, autoUpgradeParticipantCount: state.upgradeOnParticipant })
       });
       if (!res.ok) {
         if (res.status === 409) {

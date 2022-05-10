@@ -9,6 +9,10 @@
             <option v-for="roomType in roomTypes" :value="roomType.value">{{ roomType.label }}</option>
           </select>
         </div>
+        <div class="pure-control-group">
+          <label>Upgrade on participant</label>
+          <input type="text" placeholder="0" size="3" ref="upgradeOnParticipant" v-model="upgradeOnParticipant" @change="setUpgradeOnParticipant()"/>
+        </div>
       </fieldset>
       <fieldset>
         <legend>Preferred Devices</legend>
@@ -98,6 +102,7 @@ export default {
       agc: false,
       defaultHdVideo: false,
       conferenceRoomType: 'MESH',
+      upgradeOnParticipant: 0,
       roomTypes: ROOM_TYPES
     };
   },
@@ -128,6 +133,9 @@ export default {
     },
     setConferenceRoomType() {
       this.$store.state.conferenceRoomType = this.conferenceRoomType;
+    },
+    setUpgradeOnParticipant() {
+      this.$store.state.upgradeOnParticipant = this.upgradeOnParticipant;
     }
   }
 };
