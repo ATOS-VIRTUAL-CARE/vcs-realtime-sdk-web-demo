@@ -7,7 +7,7 @@
   "scripts": {
     "postinstall": "cd backend && npm install && cd ../frontend && npm install --force",
     "start": "cd backend && NODE_ENV=production npm start",
-    "start:backend": "cd backend && cross-env NODE_ENV=production npm start",
+    "start:backend": "cd backend && cross-env npm start",
     "start:frontend": "cd frontend && npm run dev",
     "start:frontend:https": "cd frontend && npm run dev -- --https",
     "dev": "run-p start:backend start:frontend",
