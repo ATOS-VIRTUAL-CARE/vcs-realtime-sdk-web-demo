@@ -117,10 +117,11 @@ button {
       position: relative;
       text {
         position: absolute;
+        top: 40px;
       }
       video {
         width: 100%;
-        height: 100%;
+        height: 100vh;
       }
     }
   }
