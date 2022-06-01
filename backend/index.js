@@ -77,7 +77,7 @@ app.post('/api/room', basicAuth(), async (req, res) => {
         'content-type': 'application/json',
         'x-vcs-token': process.env.VCS_API_KEY
       },
-      body: JSON.stringify({ name: req.body.name, conferenceType: req.body.conferenceType })
+      body: JSON.stringify({ name: req.body.name, conferenceType: req.body.conferenceType, autoUpgradeParticipantCount: req.body.autoUpgradeParticipantCount })
     });
     if (!result.ok) {
       throw new Error(`${result.status} ${result.statusText}`);
