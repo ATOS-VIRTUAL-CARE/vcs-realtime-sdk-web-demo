@@ -6,7 +6,7 @@ const store = createStore({
   state() {
     return {
       activeRoom: null,
-      conferenceRoomType: 'MESH',
+      conferenceRoomType: null,
       upgradeOnParticipant: 0,
       mediaPreselection: null,
       user: null,
@@ -29,6 +29,9 @@ const store = createStore({
     },
     useVideo: state => {
       return !state.mediaPreselection|| state.mediaPreselection === 'video' || state.mediaPreselection === 'both';
+    },
+    conferenceType: state => {
+      return state.conferenceRoomType;
     }
   },
 
