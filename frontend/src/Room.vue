@@ -3,7 +3,7 @@
 
   <div v-if="room" ref="room" class="room" :class="{ mobile }">
     <div class="text">
-      <div data-autotest="displayedRoomName" v-if="room.name">Room: {{ room.name }}, connectionType: {{ conferenceRoomType }}</div>
+      <div data-autotest="displayedRoomName" v-if="room.name">Room: {{ room.name }}, conferenceType: {{ room.conferenceType }}</div>
     </div>
     <div class="actions">
       <button data-autotest="toggleCamera" @click="switchCamera" v-if="mobile" class="pure-button pure-button-primary switch-camera">
@@ -188,7 +188,6 @@ export default {
       mdiPhoneHangup,
       mdiCameraFlip,
       mdiChat,
-      conferenceRoomType: this.$store.state.conferenceRoomType
     };
   },
 

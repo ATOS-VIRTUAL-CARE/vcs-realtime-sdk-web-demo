@@ -110,6 +110,7 @@ export default {
   async created() {
     this.devices = await Device.getDevices();
     this.videocodec = Settings.preferredVideoCodec;
+    this.conferenceRoomType = this.$store.state.conferenceRoomType;
     this.agc = Device.autoGainControl;
     this.defaultHdVideo = Settings.defaultHdVideo;
   },
@@ -132,7 +133,7 @@ export default {
       Device.autoGainControl = !!e.target.checked;
     },
     setConferenceRoomType() {
-      this.$store.commit('setConferenceRoomType',this.conferenceRoomType)
+      this.$store.state.conferenceRoomType = this.conferenceRoomType;
     },
     setUpgradeOnParticipant() {
       this.$store.state.upgradeOnParticipant = this.upgradeOnParticipant;

@@ -42,10 +42,6 @@ const store = createStore({
     setUser: (state, user) => {
       localStorage.setItem('user', JSON.stringify(user));
       state.user = user;
-    },
-    setConferenceRoomType: (state, conferenceRoomType) => {
-      state.conferenceRoomType = conferenceRoomType;
-      console.log('this is the state', conferenceRoomType);
     }
   },
 
@@ -60,7 +56,7 @@ const store = createStore({
         method: 'post',
         headers,
         credentials: isBasicAuth ? 'include' : 'omit',
-        body: JSON.stringify({ name, conferenceType: state.conferenceRoomType, autoUpgradeParticipantCount: state.upgradeOnParticipant }),
+        body: JSON.stringify({ name, conferenceType: state.conferenceRoomType, autoUpgradeParticipantCount: state.upgradeOnParticipant })
       });
       if (!res.ok) {
         if (res.status === 409) {
@@ -76,7 +72,7 @@ const store = createStore({
     async fetchRoom({ commit }, name) {
       let res = await fetch(`${backend}/api/room?name=${name}`, {
         method: 'get',
-        headers: { 'content-type': 'application/json' },
+        headers: { 'content-type': 'application/json' }
       });
       if (!res.ok) {
         if (res.status === 404) {
@@ -86,7 +82,6 @@ const store = createStore({
         }
       }
       res = await res.json();
-      commit('setConferenceRoomType', res.room.conferenceType)
       commit('saveToken', { room: res.room.name, token: res.room.token });
       console.log(`Fetched room ${name}`);
       return res.room.token;

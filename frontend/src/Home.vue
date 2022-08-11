@@ -121,7 +121,6 @@ export default {
   async created() {
     // Fetch config backend
     await this.$store.dispatch('fetchConfig');
-
     this.roomName = this.$store.state.activeRoom || randomWords({ exactly: 1, maxLength: 5, wordsPerString: 2, separator:' ' })[0];
 
     this.countries = Object.keys(countries)
