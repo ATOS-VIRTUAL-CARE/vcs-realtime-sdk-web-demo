@@ -161,6 +161,7 @@ import { joinRoom } from 'vcs-realtime-sdk';
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiVideo, mdiVideoOff, mdiMicrophone, mdiMicrophoneOff, mdiPhoneHangup, mdiCameraFlip, mdiChat } from '@mdi/js';
 import Chat from './Chat.vue';
+import store from './store';
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -187,7 +188,7 @@ export default {
       mdiPhoneHangup,
       mdiCameraFlip,
       mdiChat,
-      conferenceRoomType: this.$store.getters.conferenceType
+      conferenceRoomType: this.$store.state.conferenceRoomType
     };
   },
 

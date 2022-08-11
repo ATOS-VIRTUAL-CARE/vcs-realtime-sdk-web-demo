@@ -110,7 +110,6 @@ export default {
   data() {
     return {
       roomName: null,
-      conferenceRoomType: this.$store.getters.conferenceType ||'MESH',
       countries: [],
       user: {},
       mediaPreselection: 'both',
@@ -141,7 +140,6 @@ export default {
         .dispatch(create ? 'createRoom' : 'fetchRoom', this.roomName)
         .then(() => {
           this.$store.state.mediaPreselection = this.mediaPreselection;
-          this.$store.state.conferenceRoomType = this.conferenceRoomType;
           this.$store.commit('setUser', this.user);
           this.$router.push({ path: 'room', query: { id: this.roomName } });
         })

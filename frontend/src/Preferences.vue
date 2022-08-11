@@ -101,7 +101,7 @@ export default {
       videocodec: '',
       agc: false,
       defaultHdVideo: false,
-      conferenceRoomType: 'MESH',
+      conferenceRoomType: null,
       upgradeOnParticipant: 0,
       roomTypes: ROOM_TYPES
     };
@@ -132,7 +132,7 @@ export default {
       Device.autoGainControl = !!e.target.checked;
     },
     setConferenceRoomType() {
-      this.$store.state.conferenceRoomType = this.conferenceRoomType;
+      this.$store.commit('setConferenceRoomType',this.conferenceRoomType)
     },
     setUpgradeOnParticipant() {
       this.$store.state.upgradeOnParticipant = this.upgradeOnParticipant;
