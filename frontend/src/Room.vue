@@ -186,7 +186,7 @@ export default {
       mdiMicrophoneOff,
       mdiPhoneHangup,
       mdiCameraFlip,
-      mdiChat,
+      mdiChat
     };
   },
 
