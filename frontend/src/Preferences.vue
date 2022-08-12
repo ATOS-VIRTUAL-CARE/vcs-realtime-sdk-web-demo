@@ -101,7 +101,7 @@ export default {
       videocodec: '',
       agc: false,
       defaultHdVideo: false,
-      conferenceRoomType: 'MESH',
+      conferenceRoomType: null,
       upgradeOnParticipant: 0,
       roomTypes: ROOM_TYPES
     };
@@ -110,6 +110,7 @@ export default {
   async created() {
     this.devices = await Device.getDevices();
     this.videocodec = Settings.preferredVideoCodec;
+    this.conferenceRoomType = this.$store.state.conferenceRoomType;
     this.agc = Device.autoGainControl;
     this.defaultHdVideo = Settings.defaultHdVideo;
   },
