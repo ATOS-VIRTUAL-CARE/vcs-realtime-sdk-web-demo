@@ -1,7 +1,7 @@
 {
   "name": "vcs-realtime-sdk-demo-frontend",
   "version": "0.5.7",
-  "author": "roger.urscheler@atos.net",
+  "author": "Unify Software & Solutions GmbH & Co. KG, a Mitel company",
   "license": "Apache-2.0",
   "scripts": {
     "dev": "vite",

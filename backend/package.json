@@ -8,7 +8,7 @@
   },
   "type": "module",
   "keywords": [],
-  "author": "roger.urscheler@atos.net",
+  "author": "Unify Software & Solutions GmbH & Co. KG, a Mitel company",
   "license": "Apache-2.0",
   "dependencies": {
     "cors": "2.8.5",
