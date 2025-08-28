@@ -31,7 +31,7 @@ if (!process.env.VCS_API_KEY) {
   process.exit(1);
 }
 console.log('VCS_API_KEY:', process.env.VCS_API_KEY);
-console.log('VCS_AUTH_TYPE:', process.env.VCS_AUTH_TYPE);
+console.log('AUTH_TYPE:', process.env.AUTH_TYPE);
 console.log('HTTPS:', process.env.HTTPS);
 console.log('PORT:', process.env.PORT);
 

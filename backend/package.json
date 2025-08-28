@@ -1,6 +1,6 @@
 {
   "name": "vcs-realtime-sdk-demo-backend",
-  "version": "0.5.6",
+  "version": "0.5.7",
   "description": "Express app to create rooms and host static vue app",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "type": "module",
   "keywords": [],
-  "author": "roger.urscheler@atos.net",
+  "author": "Unify Software & Solutions GmbH & Co. KG, a Mitel company",
   "license": "Apache-2.0",
   "dependencies": {
     "cors": "2.8.5",
